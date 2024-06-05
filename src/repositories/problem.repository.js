@@ -8,12 +8,12 @@ class ProblemRepository {
             const problem = await Problem.create({
                 title: problemData.title,
                 description: problemData.description,
-                testCases: (problemData.testCases)? problemData.testCases : [],
+                testCases: (problemData.testCases) ? problemData.testCases : [],
             });
             return problem;
         } catch (error) {
-          console.log(error);
-          throw error;  
+            console.log(error);
+            throw error;
         }
     }
 
@@ -30,10 +30,23 @@ class ProblemRepository {
     async getProblem(id) {
         try {
             const problem = await Problem.findById(id);
-            if(!problem) {
+            if (!problem) {
                 throw new NotFoundError("Problem", id);
             }
             return problem;
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
+    }
+
+    async deleteProblem(id) {
+        try {
+            const deletedProblem = await Problem.findByIdAndDelete(id);
+            if(!deletedProblem) {
+                throw new NotFoundError("Problem", id);
+            }
+            return deletedProblem;
         } catch (error) {
             console.log(error);
             throw error;

@@ -11,13 +11,13 @@ function pingProblemController(req, res) {
     })
 }
 
-async function addProblem(req,res,next) {
+async function addProblem(req, res, next) {
     console.log("incoming request", req.body);
     try {
         const newProblem = await problemService.createProblem(req.body);
         return res.status(StatusCodes.CREATED).json({
             success: true,
-            message:'Successfully created the new problem',
+            message: 'Successfully created the new problem',
             data: newProblem,
             error: {}
         });
@@ -26,7 +26,7 @@ async function addProblem(req,res,next) {
     }
 }
 
-async function getProblems(req,res,next) {
+async function getProblems(req, res, next) {
     try {
         const response = await problemService.getAllProblems();
         return res.status(StatusCodes.OK).json({
@@ -40,7 +40,7 @@ async function getProblems(req,res,next) {
     }
 }
 
-async function getProblem(req,res,next) {
+async function getProblem(req, res, next) {
     try {
         const response = await problemService.getProblem(req.params.id);
         return res.status(StatusCodes.OK).json({
@@ -52,15 +52,24 @@ async function getProblem(req,res,next) {
     } catch (error) {
         next(error)
     }
-
 }
 
-function deleteProblem(req,res) {
-    
+async function deleteProblem(req, res, next) {
+    try {
+        const deletedProblem = await problemService.deleteProblem(req.params.id);
+        return res.status(StatusCodes.OK).json({
+            success: true,
+            message: 'Successfully deleted a problem',
+            data: deletedProblem,
+            error: {}
+        })
+    } catch (error) {
+        next(error);
+    }
 }
 
-function updateProblem(req,res) {
-    
+function updateProblem(req, res) {
+
 }
 
 module.exports = {

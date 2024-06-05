@@ -1,5 +1,5 @@
-const NotFoundError = require("../errors/notFound.error");
-const { Problem } = require("../models");
+const NotFoundError = require('../errors/notFound.error');
+const { Problem } = require('../models');
 
 class ProblemRepository {
 
@@ -31,7 +31,7 @@ class ProblemRepository {
         try {
             const problem = await Problem.findById(id);
             if (!problem) {
-                throw new NotFoundError("Problem", id);
+                throw new NotFoundError('Problem', id);
             }
             return problem;
         } catch (error) {
@@ -43,8 +43,8 @@ class ProblemRepository {
     async deleteProblem(id) {
         try {
             const deletedProblem = await Problem.findByIdAndDelete(id);
-            if(!deletedProblem) {
-                throw new NotFoundError("Problem", id);
+            if (!deletedProblem) {
+                throw new NotFoundError('Problem', id);
             }
             return deletedProblem;
         } catch (error) {

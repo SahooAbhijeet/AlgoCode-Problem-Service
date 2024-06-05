@@ -1,4 +1,4 @@
-const sanitizeMarkeddownContent = require("../utils/markeddownSanitizer");
+const sanitizeMarkeddownContent = require('../utils/markeddownSanitizer');
 
 class ProblemService {
     constructor(problemRepository) {

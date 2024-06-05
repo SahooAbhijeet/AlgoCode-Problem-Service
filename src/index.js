@@ -1,6 +1,8 @@
 const express = require('express');
 const {ServerConfig} = require('./config');
-const apiRouter  = require('./routes')
+const apiRouter  = require('./routes');
+const { errorHandler } = require('./utils');
+const connectToDB = require('./config/db.config');
 
 const app = express();
 

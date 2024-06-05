@@ -26,11 +26,21 @@ async function addProblem(req,res,next) {
     }
 }
 
-function getProblem(req,res) {
-    
+async function getProblems(req,res,next) {
+    try {
+        const response = await problemService.getProblems();
+        return res.status(StatusCodes.OK).json({
+            success: true,
+            message: 'Successfully get all the problems',
+            data: response,
+            error: {}
+        })
+    } catch (error) {
+        next(error);
+    }
 }
 
-function getProblems(req,res) {
+function getProblem(req,res) {
     
 }
 

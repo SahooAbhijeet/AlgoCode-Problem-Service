@@ -20,7 +20,7 @@ async function addProblem(req,res,next) {
             message:'Successfully created the new problem',
             data: newProblem,
             error: {}
-        })
+        });
     } catch (error) {
         next(error);
     }
@@ -28,20 +28,31 @@ async function addProblem(req,res,next) {
 
 async function getProblems(req,res,next) {
     try {
-        const response = await problemService.getProblems();
+        const response = await problemService.getAllProblems();
         return res.status(StatusCodes.OK).json({
             success: true,
             message: 'Successfully get all the problems',
             data: response,
             error: {}
-        })
+        });
     } catch (error) {
         next(error);
     }
 }
 
-function getProblem(req,res) {
-    
+async function getProblem(req,res,next) {
+    try {
+        const response = await problemService.getProblem(req.params.id);
+        return res.status(StatusCodes.OK).json({
+            success: true,
+            message: 'Successfully fetched a problem',
+            data: response,
+            error: {}
+        });
+    } catch (error) {
+        next(error)
+    }
+
 }
 
 function deleteProblem(req,res) {
